@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello WebAssembly</title>
+
+    
+</head>
+<body>
+    Check the console for a greeting from Rust and WebAssembly!
+    <br>
+    <input type="number" id="input1" placeholder="Digite o primeiro valor">
+    <br>
+    <input type="number" id="input2" placeholder="Digite o segundo valor">
+    <br>
+    <button id="btnMostrar">Mostrar Valores</button>
+</body>
+
+<script type="module">
+    import init, { greet, add } from './pkg/wasm_hello_world.js';
+
+    async function runWasm() {
+        let valor1 = document.getElementById('input1').value;
+        let valor2 = document.getElementById('input2').value;
+        await init();
+        greet();
+        console.log(add(valor1, valor2));
+        alert("gustavo no rust: "+add(valor1, valor2));
+    }
+    document.getElementById('btnMostrar').addEventListener('click', runWasm);
+</script>
+</html>
